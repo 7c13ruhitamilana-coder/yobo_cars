@@ -1,490 +1,372 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Car Rentals</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Smart Car Rentals</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
+
 <body>
-  <main class="container">
-    <nav class="nav">
-      <div class="logo-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="10" rx="2" ry="2"></rect><path d="M7 10V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4"></path><circle cx="8" cy="18" r="1"></circle><circle cx="16" cy="18" r="1"></circle></svg>
-        <span id="companyName">Smart Car Rentals</span>
-      </div>
-      <div class="nav-links">
-        <span class="active">Home</span>
-        <span>Book Online</span>
-        <span>Car models</span>
-        <span>Insurance</span>
-      </div>
-      <div class="nav-actions">
-        <div class="try-pill">Try AI</div>
-        <button class="icon-btn">👤</button>
-        <button class="icon-btn">🛍️</button>
-      </div>
-    </nav>
-
-    <section id="stepHero" class="step">
-      <section class="hero">
-        <h1 id="heroTitle">Rent Your Dream Drive in Seconds.</h1>
-        <img id="heroSticker" src="" />
-        <p id="heroSubtitle">From sleek city sedans to spacious family SUVs, we have the perfect ride for every journey. Transparent pricing. No hidden fees. Just the open road.</p>
-        <button class="btn-large" id="goToAssistant">
-          Get started now
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </section>
-    </section>
-
-    <section id="stepAssistant" class="step hidden">
-      <section class="assistant-shell">
-        <h2 class="assistant-title">Hello! I'm <span id="assistantName">Yobo</span></h2>
-        <p class="assistant-sub">Helping with car rentals</p>
-        <div class="bubble">I can help you find the perfect car for your trip!</div>
-        <div class="name-row">
-          <input id="customerName" placeholder="Type your question..." />
-          <button class="btn-dark" id="saveName">Ask Yobo</button>
-          <div style="clear: both;"></div>
-        </div>
-      </section>
-      <div id="nameError" class="error hidden"></div>
-    </section>
-
-    <section id="stepDetails" class="step hidden">
-      <div class="section-header">
-        <span class="section-num">01</span>
-        <span class="section-text" id="detailsTitle">Fill in Your Details</span>
-        <div class="section-line"></div>
-      </div>
-
-      <div class="form-subtitle">Fill this form up</div>
-
-      <div class="grid-2">
-        <div class="field">
-          <label>First name *</label>
-          <input id="fullName" placeholder="Enter your first name" />
-        </div>
-
-        <div class="field">
-          <label>Last name*</label>
-          <input placeholder="Enter your last name" />
-        </div>
-
-        <div class="field">
-          <label>Email *</label>
-          <input placeholder="Enter your email" />
-        </div>
-
-        <div class="field">
-          <label>Phone</label>
-          <div class="phone-row">
-            <select id="phoneCode">
-              <option value="+91">🇮🇳</option>
-              <option value="+1">🇺🇸</option>
-              <option value="+971">🇦🇪</option>
-              <option value="+44">🇬🇧</option>
-            </select>
-            <input id="phone" placeholder="Enter your phone number" />
-          </div>
-        </div>
-
-        <div class="field">
-          <label>City</label>
-          <input id="city" placeholder="Select city" />
-        </div>
-
-        <div class="field">
-          <label>Date picker</label>
-          <div class="date-range-row">
-            <input id="startDate" type="date" style="width:50%" />
-            <input id="endDate" type="date" style="width:50%" />
-          </div>
-        </div>
-      </div>
-      <button class="btn-outline" id="submitDetails">Submit</button>
-      <div id="detailsError" class="error hidden"></div>
-    </section>
-
-    <section id="stepFleet" class="step hidden">
-      <div class="section-header">
-        <span class="section-num">02</span>
-        <span class="section-text">Pick Your Dream Car</span>
-        <div class="section-line"></div>
-      </div>
-      <div id="fleetGrid" class="fleet-grid"></div>
-      <div id="fleetError" class="error hidden"></div>
-    </section>
-
-    <section id="stepQuote" class="step hidden">
-      <div class="quote-stage">
-
-        <div class="quote-left">
-          <div class="quote-left-pill">Get a Quotation</div>
-          <h2 class="quote-left-title">Instant AI<br>Quotation</h2>
-          <p class="quote-left-copy">Automate your fleet booking in seconds with our intelligent rental engine.</p>
-          <button class="quote-btn-border" id="changeCar">Get Started</button>
-        </div>
-
-        <section class="quote-panel">
-          <div class="quote-panel-head">
-            <h3>Smart Quote Engine</h3>
-            <div class="ai-pill">AI ACTIVE</div>
-          </div>
-
-          <div class="quote-panel-fields">
-            <div class="quote-mini-field">
-              <span>Pickup Location</span>
-              <strong id="qCityInline">-</strong>
-            </div>
-            <div class="quote-mini-field">
-              <span>Vehicle Category</span>
-              <strong id="qCarInline">-</strong>
-            </div>
-          </div>
-
-          <div class="quote-highlight">
-            <div>
-              <div class="quote-estimate-label">Estimated Total</div>
-              <div id="qTotal" class="quote-value">-</div>
-              <div class="quote-perday">per day</div>
-            </div>
-            <button class="quote-confirm-btn" id="confirmBooking">Book with AI</button>
-          </div>
-
-          <div class="insurance-box">
-            <h4 style="margin:0 0 10px; font-weight:500;">Insurance Add-on</h4>
-            <div id="insuranceOptions" class="insurance-options"></div>
-            <p id="insuranceStatus" style="font-size:14px; color:#666;">Selected: No Insurance</p>
-          </div>
-
-          <div class="hidden">
-            <span id="qName"></span><span id="qCar"></span><span id="qDays"></span><span id="qFormula"></span>
-          </div>
-
-        </section>
-      </div>
-
-      <div id="bookingSuccess" class="success hidden"></div>
-      <div id="bookingError" class="error hidden"></div>
-    </section>
-  </main>
-
-  <script>
-    const INSURANCE_PLANS = [
-      { id: "none", label: "No Insurance", perDay: 0 },
-      { id: "basic", label: "Basic Cover", perDay: 700 },
-      { id: "premium", label: "Premium Cover", perDay: 1400 },
-    ];
-
-    const state = {
-      config: null,
-      details: { customer_name: "", phone: "", city: "", start_date: "", end_date: "" },
-      fleetById: {},
-      selectedCar: null,
-      estimate: null,
-      insurance: { id: "none", label: "No Insurance", perDay: 0, total: 0 },
-      grandTotal: 0,
-    };
-
-    const getEl = (id) => document.getElementById(id);
-    const show = (el) => el.classList.remove("hidden");
-    const hide = (el) => el.classList.add("hidden");
-
-    function clearMessages() {
-      ["nameError", "detailsError", "fleetError", "bookingSuccess", "bookingError"].forEach((id) => hide(getEl(id)));
-    }
-
-    function showError(el, msg) {
-      el.textContent = msg;
-      show(el);
-    }
-
-    function onlyStep(stepId) {
-      ["stepHero", "stepAssistant", "stepDetails", "stepFleet", "stepQuote"].forEach((id) => hide(getEl(id)));
-      show(getEl(stepId));
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function bindEnter(ids, handler) {
-      ids.forEach((id) => {
-        const el = getEl(id);
-        if (!el) return;
-        el.addEventListener("keydown", (e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            handler();
-          }
-        });
-      });
-    }
-
-    function formatMoney(value) {
-      const c = (state.config && state.config.currency) || "$";
-      return `${c}${Number(value || 0).toLocaleString()}`;
-    }
-
-    function renderInsuranceOptions() {
-      const box = getEl("insuranceOptions");
-      box.innerHTML = INSURANCE_PLANS.map((p) => `
-        <label style="display:flex; gap:10px; font-size:14px; cursor:pointer;">
-          <input type="radio" name="insurancePlan" value="${p.id}" ${p.id === state.insurance.id ? "checked" : ""} />
-          <span>${p.label} (+${formatMoney(p.perDay)}/day)</span>
-        </label>
-      `).join("");
-
-      document.querySelectorAll('input[name="insurancePlan"]').forEach((radio) => {
-        radio.addEventListener("change", () => {
-          const picked = INSURANCE_PLANS.find((p) => p.id === radio.value);
-          if (!picked) return;
-          state.insurance = { ...picked, total: 0 };
-          updateQuoteTotals();
-        });
-      });
-    }
-
-    function updateQuoteTotals() {
-      if (!state.estimate || !state.selectedCar) return;
-
-      const days = Number(state.estimate.days || 1);
-      const base = Number(state.estimate.estimated_total || 0);
-      const insuranceTotal = Number(state.insurance.perDay || 0) * days;
-      const grand = base + insuranceTotal;
-
-      state.insurance.total = insuranceTotal;
-      state.grandTotal = grand;
-
-      getEl("qTotal").textContent = formatMoney(grand);
-      getEl("qFormula").innerHTML =
-        `Base: ${formatMoney(base)} (${days} days x ${formatMoney(state.selectedCar.price_per_day)} / day)<br>` +
-        `Insurance: ${formatMoney(insuranceTotal)} (${days} days x ${formatMoney(state.insurance.perDay)} / day)`;
-
-      getEl("insuranceStatus").textContent =
-        `Selected: ${state.insurance.label}`;
-    }
-
-    async function initConfig() {
-      const query = window.location.search || "";
-      const res = await fetch(`/api/config${query}`);
-      const cfg = await res.json();
-      state.config = cfg;
-
-      getEl("companyName").textContent = cfg.company_name || "Smart Car Rentals";
-      getEl("assistantName").textContent = cfg.assistant_name || "Yobo";
-      getEl("heroTitle").textContent = cfg.hero_title || "Rent Your Dream Drive in Seconds.";
-      getEl("heroSubtitle").textContent = cfg.hero_subtitle || "";
-
-      const sticker = getEl("heroSticker");
-      sticker.src = cfg.hero_image || "/static/ferrari-sticker.png";
-      sticker.onerror = () => {
-        sticker.src = "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop";
-      };
-
-      document.documentElement.style.setProperty("--accent", cfg.accent || "#ceb7bc");
-
-      onlyStep("stepHero");
-      renderInsuranceOptions();
-    }
-
-    /* REWRITTEN FLEET CARD HTML TO MATCH SCREENSHOT 4 */
-    function fleetCardHTML(car) {
-      const img = car.photo_url || "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop";
-      const color = car.color || car.colour || "Cherry Red";
-      const id = Number(car.id);
-      return `
-        <article class="fleet-card">
-          <img src="${img}" alt="${car.make || ""} ${car.model || ""}" />
-          <div class="fleet-meta">
-            <div>Make: ${car.make || "Ferrari"}</div>
-            <div>Model: ${car.model || "XXX"}</div>
-            <div>Colour: ${color}</div>
-          </div>
-          <button class="select-car" data-id="${id}">Select this car</button>
-        </article>
-      `;
-    }
-
-    async function loadFleet() {
-      clearMessages();
-      onlyStep("stepFleet");
-      getEl("fleetGrid").innerHTML = "<p>Loading available cars...</p>";
-
-      const query = new URLSearchParams({
-        start_date: state.details.start_date,
-        end_date: state.details.end_date
-      });
-
-      const maybeBiz = new URLSearchParams(window.location.search).get("biz_id");
-      if (maybeBiz) query.set("biz_id", maybeBiz);
-
-      let data;
-      try {
-        const res = await fetch(`/api/fleet?${query.toString()}`);
-        data = await res.json();
-      } catch {
-        getEl("fleetGrid").innerHTML = "";
-        showError(getEl("fleetError"), "Network error while loading fleet.");
-        return;
-      }
-
-      if (!data.ok) {
-        getEl("fleetGrid").innerHTML = "";
-        showError(getEl("fleetError"), data.error || "Could not load fleet.");
-        return;
-      }
-
-      const fleet = data.data || [];
-      if (!fleet.length) {
-        getEl("fleetGrid").innerHTML = "";
-        showError(getEl("fleetError"), "No cars available for selected dates.");
-        return;
-      }
-
-      state.fleetById = {};
-      for (const car of fleet) state.fleetById[Number(car.id)] = car;
-
-      getEl("fleetGrid").innerHTML = fleet.map(fleetCardHTML).join("");
-      document.querySelectorAll(".select-car").forEach((btn) => {
-        btn.addEventListener("click", async () => {
-          const id = Number(btn.getAttribute("data-id"));
-          state.selectedCar = state.fleetById[id];
-          await buildEstimate();
-        });
-      });
-    }
-
-    async function buildEstimate() {
-      clearMessages();
-      const res = await fetch("/api/estimate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          start_date: state.details.start_date,
-          end_date: state.details.end_date,
-          price_per_day: state.selectedCar ? state.selectedCar.price_per_day : 0
-        })
-      });
-      const data = await res.json();
-
-      if (!data.ok) {
-        showError(getEl("fleetError"), data.error || "Could not calculate estimate.");
-        onlyStep("stepFleet");
-        return;
-      }
-
-      state.estimate = data;
-      state.insurance = { id: "none", label: "No Insurance", perDay: 0, total: 0 };
-      state.grandTotal = Number(data.estimated_total || 0);
-      renderInsuranceOptions();
-
-      const chosenCar = `${state.selectedCar.make || ""} ${state.selectedCar.model || ""}`.trim();
-      getEl("qName").textContent = state.details.customer_name;
-      getEl("qCityInline").textContent = state.details.city;
-      getEl("qCarInline").textContent = chosenCar || "Luxury Sedan";
-      getEl("qCar").textContent = chosenCar;
-      getEl("qDays").textContent = data.days;
-      updateQuoteTotals();
-
-      onlyStep("stepQuote");
-    }
-
-    function handleGoToAssistant() {
-      clearMessages();
-      onlyStep("stepAssistant");
-    }
-
-    function handleSaveName() {
-      clearMessages();
-      const name = getEl("customerName").value.trim();
-      if (!name) {
-        showError(getEl("nameError"), "Please type a message.");
-        return;
-      }
-
-      state.details.customer_name = name;
-      // Not changing detailsTitle to keep the strict screenshot 3 look ("Fill in Your Details")
-      onlyStep("stepDetails");
-    }
-
-    async function handleSubmitDetails() {
-      clearMessages();
-      const fullName = getEl("fullName").value.trim();
-      const phoneCode = getEl("phoneCode").value;
-      const phoneNumber = getEl("phone").value.trim();
-      const city = getEl("city").value.trim();
-      const start = getEl("startDate").value;
-      const end = getEl("endDate").value;
-
-      if (!fullName || !phoneNumber || !city || !start || !end) {
-        showError(getEl("detailsError"), "Please fill all required fields.");
-        return;
-      }
-      if (new Date(end) < new Date(start)) {
-        showError(getEl("detailsError"), "End date must be on or after start date.");
-        return;
-      }
-
-      state.details.customer_name = fullName;
-      state.details.phone = `${phoneCode}${phoneNumber}`;
-      state.details.city = city;
-      state.details.start_date = start;
-      state.details.end_date = end;
-
-      await loadFleet();
-    }
-
-    function handleChangeCar() {
-      clearMessages();
-      onlyStep("stepFleet");
-    }
-
-    async function handleConfirmBooking() {
-      clearMessages();
-
-      if (!state.selectedCar || !state.estimate) {
-        showError(getEl("bookingError"), "Select a car and generate quote first.");
-        return;
-      }
-
-      const payload = {
-        customer_name: state.details.customer_name,
-        phone: state.details.phone,
-        city: state.details.city,
-        start_date: state.details.start_date,
-        end_date: state.details.end_date,
-        car_id: state.selectedCar.id,
-        total_price: state.grandTotal,
-        insurance_plan: state.insurance.id,
-        insurance_per_day: state.insurance.perDay,
-        insurance_total: state.insurance.total
-      };
-
-      const res = await fetch("/api/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-
-      if (data.ok) {
-        getEl("bookingSuccess").textContent = data.message || "Booking confirmed.";
-        show(getEl("bookingSuccess"));
-      } else {
-        showError(getEl("bookingError"), data.error || "Booking failed.");
-      }
-    }
-
-    getEl("goToAssistant").addEventListener("click", handleGoToAssistant);
-    getEl("saveName").addEventListener("click", handleSaveName);
-    getEl("submitDetails").addEventListener("click", handleSubmitDetails);
-    getEl("changeCar").addEventListener("click", handleChangeCar);
-    getEl("confirmBooking").addEventListener("click", handleConfirmBooking);
-
-    bindEnter(["customerName"], handleSaveName);
-    bindEnter(["fullName", "phone", "city", "startDate", "endDate"], handleSubmitDetails);
-
-    initConfig();
-  </script>
+
+<main class="container">
+
+<nav class="nav">
+<div class="logo-wrap">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="3" y="10" width="18" height="10" rx="2" ry="2"></rect>
+<path d="M7 10V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4"></path>
+<circle cx="8" cy="18" r="1"></circle>
+<circle cx="16" cy="18" r="1"></circle>
+</svg>
+<span id="companyName">Smart Car Rentals</span>
+</div>
+
+<div class="nav-links">
+<span class="active">Home</span>
+<span id="fleetBtn">Our Fleet</span>
+<span>Insurance</span>
+</div>
+</nav>
+
+
+<section id="stepHero" class="step">
+<section class="hero">
+
+<h1 id="heroTitle">Rent Your Dream Drive in Seconds.</h1>
+
+<p id="heroSubtitle">
+From sleek city sedans to spacious family SUVs, we have the perfect ride for every journey. Transparent pricing. No hidden fees. Just the open road.
+</p>
+
+<button class="btn-large" id="goToAssistant">
+Next
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M5 12h14M12 5l7 7-7 7"/>
+</svg>
+</button>
+
+</section>
+</section>
+
+
+<section id="stepAssistant" class="step hidden">
+
+<section class="assistant-shell">
+
+<h2 class="assistant-title">
+Hello! I'm <span id="assistantName">Yobo</span>
+</h2>
+
+<p class="assistant-sub">
+Helping with car rentals
+</p>
+
+<div class="bubble">
+I can help you find the perfect car for your trip!
+</div>
+
+<div class="name-row">
+
+<input id="customerName" placeholder="Type your question..." />
+
+<button class="btn-dark" id="saveName">
+Ask Yobo
+</button>
+
+<div style="clear: both;"></div>
+
+</div>
+
+</section>
+
+<div id="nameError" class="error hidden"></div>
+
+</section>
+
+
+<section id="stepDetails" class="step hidden">
+
+<div class="section-header">
+<span class="section-num">01</span>
+<span class="section-text" id="detailsTitle">Fill in Your Details</span>
+<div class="section-line"></div>
+</div>
+
+<div class="form-subtitle">Fill this form up</div>
+
+<div class="grid-2">
+
+<div class="field">
+<label>First name *</label>
+<input id="fullName" placeholder="Enter your first name" />
+</div>
+
+<div class="field">
+<label>Last name*</label>
+<input placeholder="Enter your last name" />
+</div>
+
+<div class="field">
+<label>Email *</label>
+<input placeholder="Enter your email" />
+</div>
+
+<div class="field">
+<label>Phone</label>
+
+<div class="phone-row">
+
+<select id="phoneCode">
+<option value="+91">🇮🇳</option>
+<option value="+1">🇺🇸</option>
+<option value="+971">🇦🇪</option>
+<option value="+44">🇬🇧</option>
+</select>
+
+<input id="phone" placeholder="Enter your phone number" />
+
+</div>
+
+</div>
+
+<div class="field">
+<label>City</label>
+<input id="city" placeholder="Select city" />
+</div>
+
+<div class="field">
+
+<label>Date picker</label>
+
+<div class="date-range-row">
+
+<input id="startDate" type="date" style="width:50%" />
+
+<input id="endDate" type="date" style="width:50%" />
+
+</div>
+
+</div>
+
+</div>
+
+<button class="btn-outline" id="submitDetails">Submit</button>
+
+<div id="detailsError" class="error hidden"></div>
+
+</section>
+
+
+<section id="stepFleet" class="step hidden">
+
+<div class="section-header">
+<span class="section-num">02</span>
+<span class="section-text">Pick Your Dream Car</span>
+<div class="section-line"></div>
+</div>
+
+<div id="fleetGrid" class="fleet-grid"></div>
+
+<div id="fleetError" class="error hidden"></div>
+
+</section>
+  <section id="stepQuote" class="step hidden">
+
+<div class="quote-stage">
+
+<div class="quote-left">
+
+<div class="quote-left-pill">Get a Quotation</div>
+
+<h2 class="quote-left-title">
+Instant AI<br>Quotation
+</h2>
+
+<p class="quote-left-copy">
+Automate your fleet booking in seconds with our intelligent rental engine.
+</p>
+
+<button class="quote-btn-border" id="changeCar">
+Next
+</button>
+
+</div>
+
+
+<section class="quote-panel">
+
+<div class="quote-panel-head">
+
+<h3>Smart Quote Engine</h3>
+
+<div class="ai-pill">AI ACTIVE</div>
+
+</div>
+
+
+<div class="quote-panel-fields">
+
+<div class="quote-mini-field">
+<span>Pickup Location</span>
+<strong id="qCityInline">-</strong>
+</div>
+
+<div class="quote-mini-field">
+<span>Vehicle Category</span>
+<strong id="qCarInline">-</strong>
+</div>
+
+</div>
+
+
+<div class="quote-highlight">
+
+<div>
+
+<div class="quote-estimate-label">
+Estimated Total
+</div>
+
+<div id="qTotal" class="quote-value">-</div>
+
+<div class="quote-perday">per day</div>
+
+</div>
+
+
+<button class="quote-confirm-btn" id="confirmBooking">
+Book Now
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+</section>
+
+</main>
+
+<section id="stepInsurance" class="step hidden">
+
+<div class="section-header">
+<span class="section-num">03</span>
+<span class="section-text">Pick an Insurance Plan</span>
+<div class="section-line"></div>
+</div>
+
+<div class="insurance-grid">
+
+<div class="insurance-card" data-plan="basic">
+<h3>Protection Plan-<br>Basic</h3>
+
+<div class="insurance-inner">
+<h2>AED 150 <span>Per Month</span></h2>
+
+<ul>
+<li>- 50% Accident Coverage</li>
+</ul>
+
+</div>
+</div>
+
+
+<div class="insurance-card" data-plan="plus">
+
+<h3>Protection Plan-<br>Plus</h3>
+
+<div class="insurance-inner">
+
+<h2>AED 150 <span>Per Month</span></h2>
+
+<ul>
+<li>- 100% Accident Coverage</li>
+<li>- Windshield Damage</li>
+<li>- Tyre Damages</li>
+</ul>
+
+</div>
+</div>
+
+
+<div class="insurance-card" data-plan="premium">
+
+<h3>Protection Plan-<br>Premium</h3>
+
+<div class="insurance-inner">
+
+<h2>AED 150 <span>Per Month</span></h2>
+
+<ul>
+<li>- 100% Accident Coverage</li>
+<li>- Windshield Damage</li>
+<li>- Tyre Damages</li>
+<li>- Lost Keys</li>
+<li>- Rim Damage</li>
+</ul>
+
+</div>
+</div>
+
+</div>
+
+<button id="skipInsurance" class="btn-outline">Skip it</button>
+
+</section>
+
+<script>
+
+const getEl=(id)=>document.getElementById(id)
+
+function onlyStep(stepId){
+
+["stepHero","stepAssistant","stepDetails","stepFleet","stepQuote","stepInsurance"].forEach(id=>{
+getEl(id).classList.add("hidden")
+})
+
+getEl(stepId).classList.remove("hidden")
+
+}
+
+
+getEl("goToAssistant").addEventListener("click",()=>{
+onlyStep("stepAssistant")
+})
+
+
+getEl("saveName").addEventListener("click",()=>{
+onlyStep("stepDetails")
+})
+
+
+getEl("submitDetails").addEventListener("click",()=>{
+onlyStep("stepFleet")
+})
+
+
+getEl("changeCar").addEventListener("click",()=>{
+onlyStep("stepQuote")
+})
+
+
+getEl("confirmBooking").addEventListener("click",()=>{
+alert("Booking confirmed!")
+})
+
+getEl("skipInsurance").addEventListener("click",()=>{
+alert("Booking confirmed!")
+})
+
+
+getEl("fleetBtn").addEventListener("click",()=>{
+window.location.href="/fleet"
+})
+
+  initConfig();
+</script>
+
 </body>
 </html>
+
