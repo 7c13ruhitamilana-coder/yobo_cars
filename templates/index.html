@@ -343,6 +343,7 @@ onlyStep("stepDetails")
 
 getEl("submitDetails").addEventListener("click",()=>{
 onlyStep("stepFleet")
+loadFleet()
 })
 
 
@@ -363,7 +364,45 @@ alert("Booking confirmed!")
 getEl("fleetBtn").addEventListener("click",()=>{
 window.location.href="/fleet"
 })
+async function loadFleet(){
 
+const startDate = getEl("startDate").value
+const endDate = getEl("endDate").value
+
+if(!startDate || !endDate){
+getEl("fleetError").innerText="Please select start and end dates"
+getEl("fleetError").classList.remove("hidden")
+return
+}
+
+const res = await fetch(`/api/fleet?start_date=${startDate}&end_date=${endDate}`)
+const data = await res.json()
+
+if(!data.ok){
+getEl("fleetError").innerText=data.error
+getEl("fleetError").classList.remove("hidden")
+return
+}
+
+const grid = getEl("fleetGrid")
+grid.innerHTML=""
+
+data.data.forEach(car=>{
+
+const card = document.createElement("div")
+card.className="fleet-card"
+
+card.innerHTML = `
+<h3>${car.make} ${car.model}</h3>
+<p>₹${car.price_per_day} / day</p>
+<button class="btn-outline">Select</button>
+`
+
+grid.appendChild(card)
+
+})
+
+}
   initConfig();
 </script>
 
