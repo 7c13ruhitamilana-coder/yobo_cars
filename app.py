@@ -3,6 +3,12 @@ import os
 from datetime import date
 from pathlib import Path
 from typing import Any
+import streamlit as st
+
+# Access the secret
+biz_id = st.secrets["BIZ_ID"]
+
+st.write(f"Connected to Business ID: {biz_id}")
 
 from flask import Flask, jsonify, render_template, request
 

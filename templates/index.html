@@ -13,8 +13,8 @@
 
 <nav class="nav">
 <div class="logo-wrap">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<rect x="3" y="10" width="18" height="10" rx="2" ry="2"></rect>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<rect x="3" y="10" width="18" height="10" rx="2"></rect>
 <path d="M7 10V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4"></path>
 <circle cx="8" cy="18" r="1"></circle>
 <circle cx="16" cy="18" r="1"></circle>
@@ -36,14 +36,11 @@
 <h1 id="heroTitle">Rent Your Dream Drive in Seconds.</h1>
 
 <p id="heroSubtitle">
-From sleek city sedans to spacious family SUVs, we have the perfect ride for every journey. Transparent pricing. No hidden fees. Just the open road.
+From sleek city sedans to spacious family SUVs, we have the perfect ride for every journey.
 </p>
 
 <button class="btn-large" id="goToAssistant">
 Next
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<path d="M5 12h14M12 5l7 7-7 7"/>
-</svg>
 </button>
 
 </section>
@@ -74,8 +71,6 @@ I can help you find the perfect car for your trip!
 Ask Yobo
 </button>
 
-<div style="clear: both;"></div>
-
 </div>
 
 </section>
@@ -87,29 +82,11 @@ Ask Yobo
 
 <section id="stepDetails" class="step hidden">
 
-<div class="section-header">
-<span class="section-num">01</span>
-<span class="section-text" id="detailsTitle">Fill in Your Details</span>
-<div class="section-line"></div>
-</div>
-
-<div class="form-subtitle">Fill this form up</div>
-
 <div class="grid-2">
 
 <div class="field">
 <label>First name *</label>
 <input id="fullName" placeholder="Enter your first name" />
-</div>
-
-<div class="field">
-<label>Last name*</label>
-<input placeholder="Enter your last name" />
-</div>
-
-<div class="field">
-<label>Email *</label>
-<input placeholder="Enter your email" />
 </div>
 
 <div class="field">
@@ -124,7 +101,7 @@ Ask Yobo
 <option value="+44">🇬🇧</option>
 </select>
 
-<input id="phone" placeholder="Enter your phone number" />
+<input id="phone" placeholder="Enter phone number" />
 
 </div>
 
@@ -160,252 +137,58 @@ Ask Yobo
 
 <section id="stepFleet" class="step hidden">
 
-<div class="section-header">
-<span class="section-num">02</span>
-<span class="section-text">Pick Your Dream Car</span>
-<div class="section-line"></div>
-</div>
+<h2>Pick Your Dream Car</h2>
 
 <div id="fleetGrid" class="fleet-grid"></div>
 
 <div id="fleetError" class="error hidden"></div>
 
 </section>
-  <section id="stepQuote" class="step hidden">
-
-<div class="quote-stage">
-
-<div class="quote-left">
-
-<div class="quote-left-pill">Get a Quotation</div>
-
-<h2 class="quote-left-title">
-Instant AI<br>Quotation
-</h2>
-
-<p class="quote-left-copy">
-Automate your fleet booking in seconds with our intelligent rental engine.
-</p>
-
-<button class="quote-btn-border" id="changeCar">
-Next
-</button>
-
-</div>
 
 
-<section class="quote-panel">
+<section id="stepQuote" class="step hidden">
 
-<div class="quote-panel-head">
+<h2>Instant AI Quote</h2>
 
-<h3>Smart Quote Engine</h3>
+<div id="qTotal">-</div>
 
-<div class="ai-pill">AI ACTIVE</div>
-
-</div>
-
-
-<div class="quote-panel-fields">
-
-<div class="quote-mini-field">
-<span>Pickup Location</span>
-<strong id="qCityInline">-</strong>
-</div>
-
-<div class="quote-mini-field">
-<span>Vehicle Category</span>
-<strong id="qCarInline">-</strong>
-</div>
-
-</div>
-
-
-<div class="quote-highlight">
-
-<div>
-
-<div class="quote-estimate-label">
-Estimated Total
-</div>
-
-<div id="qTotal" class="quote-value">-</div>
-
-<div class="quote-perday">per day</div>
-
-</div>
-
-
-<button class="quote-confirm-btn" id="confirmBooking">
-Book Now
-</button>
-
-</div>
-
-</section>
-
-</div>
+<button id="confirmBooking">Book Now</button>
 
 </section>
 
 </main>
 
-<section id="stepInsurance" class="step hidden">
-
-<div class="section-header">
-<span class="section-num">03</span>
-<span class="section-text">Pick an Insurance Plan</span>
-<div class="section-line"></div>
-</div>
-
-<div class="insurance-grid">
-
-<div class="insurance-card" data-plan="basic">
-<h3>Protection Plan-<br>Basic</h3>
-
-<div class="insurance-inner">
-<h2>AED 150 <span>Per Month</span></h2>
-
-<ul>
-<li>- 50% Accident Coverage</li>
-</ul>
-
-</div>
-</div>
-
-
-<div class="insurance-card" data-plan="plus">
-
-<h3>Protection Plan-<br>Plus</h3>
-
-<div class="insurance-inner">
-
-<h2>AED 150 <span>Per Month</span></h2>
-
-<ul>
-<li>- 100% Accident Coverage</li>
-<li>- Windshield Damage</li>
-<li>- Tyre Damages</li>
-</ul>
-
-</div>
-</div>
-
-
-<div class="insurance-card" data-plan="premium">
-
-<h3>Protection Plan-<br>Premium</h3>
-
-<div class="insurance-inner">
-
-<h2>AED 150 <span>Per Month</span></h2>
-
-<ul>
-<li>- 100% Accident Coverage</li>
-<li>- Windshield Damage</li>
-<li>- Tyre Damages</li>
-<li>- Lost Keys</li>
-<li>- Rim Damage</li>
-</ul>
-
-</div>
-</div>
-
-</div>
-
-<button id="skipInsurance" class="btn-outline">Skip it</button>
-
-</section>
 
 <script>
+console.log("--- YOBO JS IS LOADED ---");
+// Wrap your code in a try-catch block so one error doesn't kill the whole app
+window.addEventListener('load', () => {
+    try {
+        const getEl = (id) => document.getElementById(id);
 
-const getEl=(id)=>document.getElementById(id)
+        function onlyStep(stepId) {
+            const steps = ["stepHero", "stepAssistant", "stepDetails", "stepFleet", "stepQuote"];
+            steps.forEach(id => {
+                const el = getEl(id);
+                if (el) el.classList.add("hidden");
+            });
+            const target = getEl(stepId);
+            if (target) target.classList.remove("hidden");
+        }
 
-function onlyStep(stepId){
+        // Only add listeners if the elements exist
+        getEl("goToAssistant")?.addEventListener("click", () => onlyStep("stepAssistant"));
+        getEl("saveName")?.addEventListener("click", () => onlyStep("stepDetails"));
+        getEl("submitDetails")?.addEventListener("click", () => {
+            onlyStep("stepFleet");
+            // You can add your fetch logic here
+        });
 
-["stepHero","stepAssistant","stepDetails","stepFleet","stepQuote","stepInsurance"].forEach(id=>{
-getEl(id).classList.add("hidden")
-})
-
-getEl(stepId).classList.remove("hidden")
-
-}
-
-
-getEl("goToAssistant").addEventListener("click",()=>{
-onlyStep("stepAssistant")
-})
-
-
-getEl("saveName").addEventListener("click",()=>{
-onlyStep("stepDetails")
-})
-
-
-getEl("submitDetails").addEventListener("click",()=>{
-onlyStep("stepFleet")
-loadFleet()
-})
-
-
-getEl("changeCar").addEventListener("click",()=>{
-onlyStep("stepQuote")
-})
-
-
-getEl("confirmBooking").addEventListener("click",()=>{
-alert("Booking confirmed!")
-})
-
-getEl("skipInsurance").addEventListener("click",()=>{
-alert("Booking confirmed!")
-})
-
-
-getEl("fleetBtn").addEventListener("click",()=>{
-window.location.href="/fleet"
-})
-async function loadFleet(){
-
-const startDate = getEl("startDate").value
-const endDate = getEl("endDate").value
-
-if(!startDate || !endDate){
-getEl("fleetError").innerText="Please select start and end dates"
-getEl("fleetError").classList.remove("hidden")
-return
-}
-
-const res = await fetch(`/api/fleet?start_date=${startDate}&end_date=${endDate}`)
-const data = await res.json()
-
-if(!data.ok){
-getEl("fleetError").innerText=data.error
-getEl("fleetError").classList.remove("hidden")
-return
-}
-
-const grid = getEl("fleetGrid")
-grid.innerHTML=""
-
-data.data.forEach(car=>{
-
-const card = document.createElement("div")
-card.className="fleet-card"
-
-card.innerHTML = `
-<h3>${car.make} ${car.model}</h3>
-<p>₹${car.price_per_day} / day</p>
-<button class="btn-outline">Select</button>
-`
-
-grid.appendChild(card)
-
-})
-
-}
-  initConfig();
+        console.log("App initialized successfully!");
+    } catch (e) {
+        console.error("System error ignored:", e);
+    }
+});
 </script>
-
 </body>
 </html>
-
