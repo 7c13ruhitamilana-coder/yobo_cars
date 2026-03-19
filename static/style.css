@@ -184,8 +184,15 @@ body {
   border-radius: 10px;
   padding: 16px;
   font-size: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 0;
   outline: none;
+}
+
+.name-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
 }
 
 .btn-dark {
@@ -197,7 +204,7 @@ body {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  float: right;
+  justify-self: end;
 }
 
 /* --- DETAILS FORM --- */
@@ -240,6 +247,21 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 30px;
   max-width: 800px;
+}
+
+#stepDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#stepDetails .grid-2 {
+  margin: 0 auto;
+}
+
+#stepDetails .btn-outline {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .field label {
@@ -335,6 +357,9 @@ body {
   border: none;
   padding: 12px;
   border-radius: 8px;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  letter-spacing: 0.02em;
   font-weight: 600;
   cursor: pointer;
   margin-top: auto;
@@ -483,34 +508,217 @@ body {
   cursor: pointer;
 }
 
+.note {
+  margin-top: 18px;
+  color: #444;
+  font-size: 14px;
+}
+
 .insurance-box { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
 .insurance-options { display: flex; flex-direction: column; gap: 10px; margin: 15px 0; }
 .hidden { display: none !important; }
 .error { color: red; margin-top: 15px; font-weight: 500; }
 .success { color: green; margin-top: 15px; font-weight: 500; }
-.insurance-grid{
+
+.insurance-header{
 display:flex;
-gap:40px;
-justify-content:center;
+align-items:center;
+gap:24px;
 margin-top:40px;
 }
 
+.insurance-header h2{
+font-family:'Playfair Display', serif;
+font-size:56px;
+font-weight:700;
+margin:0;
+}
+
+.insurance-step{
+font-family:'Playfair Display', serif;
+font-size:56px;
+font-weight:700;
+}
+
+.insurance-line{
+flex:1;
+height:2px;
+background:#000;
+margin-top:10px;
+}
+
+.insurance-grid{
+display:grid;
+grid-template-columns: repeat(3, 268px);
+gap:60px;
+justify-content:center;
+margin:40px auto 0;
+max-width: 1100px;
+}
+
 .insurance-card{
-width:260px;
 background:#cbb1b4;
-padding:20px;
-border-radius:14px;
+padding:24px 22px;
+border-radius:16px;
 cursor:pointer;
-transition:0.3s;
+transition:0.25s ease;
+width: 268px;
+height: 399px;
+display:flex;
+flex-direction:column;
+gap:14px;
+box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.insurance-card h3{
+font-family:'Playfair Display', serif;
+font-size:28px;
+margin:0;
 }
 
 .insurance-inner{
 background:white;
-padding:20px;
-border-radius:10px;
-margin-top:15px;
+padding:16px;
+border-radius:12px;
+flex: 1;
+}
+
+.insurance-price{
+display:flex;
+align-items:baseline;
+gap:10px;
+margin-bottom:10px;
+}
+
+.insurance-currency{
+font-family:'Playfair Display', serif;
+font-size:28px;
+font-weight:700;
+}
+
+.insurance-unit{
+font-size:14px;
+color:#333;
+}
+
+.insurance-inner ul{
+padding-left:18px;
+margin:10px 0 0;
+font-size:16px;
+}
+
+.insurance-inner li{
+margin-bottom:6px;
 }
 
 .insurance-card.selected{
-outline:4px solid black;
+outline:4px solid #000;
+}
+
+.insurance-skip{
+display:block;
+margin:40px auto 0;
+background:#cbb1b4;
+border:2px solid #333;
+padding:12px 32px;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+.location-layout{
+display:grid;
+grid-template-columns: 360px 1fr;
+gap:60px;
+align-items:start;
+margin:30px auto 0;
+max-width: 1000px;
+}
+
+.location-card{
+background:#cbb1b4;
+padding:24px;
+border-radius:16px;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.location-card label{
+font-size:14px;
+font-weight:600;
+}
+
+.location-card input{
+background:#fff;
+border-radius:12px;
+border:none;
+padding:12px 14px;
+font-size:14px;
+}
+
+.location-map{
+height: 280px;
+border-radius:16px;
+border:1px solid #e0e0e0;
+background:#f5f5f5;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#666;
+font-size:14px;
+}
+
+.summary-wrap{
+display:flex;
+flex-direction:column;
+align-items:center;
+margin-top:40px;
+}
+
+.summary-title{
+font-family:'Playfair Display', serif;
+font-size:42px;
+margin:0 0 20px;
+}
+
+.summary-card{
+width: 420px;
+border:1px solid #000;
+padding:24px;
+}
+
+.summary-row{
+display:flex;
+justify-content:space-between;
+font-size:14px;
+margin:6px 0;
+}
+
+.summary-row.total{
+font-size:15px;
+}
+
+.summary-divider{
+height:1px;
+background:#000;
+margin:12px 0;
+}
+
+@media (max-width: 900px) {
+  .insurance-grid{
+    grid-template-columns: 1fr;
+    gap:24px;
+  }
+  .location-layout{
+    grid-template-columns: 1fr;
+  }
+  .summary-card{
+    width: 100%;
+    max-width: 420px;
+  }
+  .insurance-header h2,
+  .insurance-step{
+    font-size:36px;
+  }
 }

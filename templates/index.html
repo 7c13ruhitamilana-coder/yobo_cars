@@ -60,7 +60,7 @@ Helping with car rentals
 </p>
 
 <div class="bubble">
-I can help you find the perfect car for your trip!
+    I can help you find the perfect car for your trip!
 </div>
 
 <div class="name-row">
@@ -148,47 +148,415 @@ Ask Yobo
 
 <section id="stepQuote" class="step hidden">
 
-<h2>Instant AI Quote</h2>
+<div class="quote-stage">
+  <div>
+    <span class="quote-left-pill">AI ACTIVE</span>
+    <h2 class="quote-left-title">Instant AI Quotation</h2>
+    <p class="quote-left-copy">Automate your fleet booking in seconds with our intelligent rental engine.</p>
+    <button class="quote-btn-border" id="changeCar">Change Car</button>
+  </div>
 
-<div id="qTotal">-</div>
+  <section class="quote-panel">
+    <div class="quote-panel-head">
+      <h3>Smart Quote Engine</h3>
+      <div class="ai-pill">AI ACTIVE</div>
+    </div>
 
-<button id="confirmBooking">Book Now</button>
+    <div class="quote-panel-fields">
+      <div class="quote-mini-field">
+        <span>Pickup Location</span>
+        <strong id="qCityInline">-</strong>
+      </div>
+      <div class="quote-mini-field">
+        <span>Vehicle Category</span>
+        <strong id="qCarInline">-</strong>
+      </div>
+    </div>
+
+    <div class="quote-highlight">
+      <div>
+        <span class="quote-estimate-label">Estimated Total</span>
+        <div id="qTotal" class="quote-value">-</div>
+        <span class="quote-perday" id="qDays">-</span>
+      </div>
+      <button class="quote-confirm-btn" id="confirmBooking">Book Now</button>
+    </div>
+
+    <div class="note" id="qFormula">-</div>
+  </section>
+</div>
 
 </section>
 
+<section id="stepInsurance" class="step hidden">
+
+<div class="insurance-header">
+  <span class="insurance-step">03</span>
+  <h2>Pick an Insurance Plan</h2>
+  <span class="insurance-line"></span>
+</div>
+
+<div class="insurance-grid" id="insuranceGrid">
+  <div class="insurance-card selected" data-plan="basic" data-price="150">
+    <h3>Protection Plan- Basic</h3>
+    <div class="insurance-inner">
+      <div class="insurance-price">
+        <span class="insurance-currency">AED 150</span>
+        <span class="insurance-unit">Per Month</span>
+      </div>
+      <ul>
+        <li>50% Accident Coverage</li>
+      </ul>
+    </div>
+  </div>
+  <div class="insurance-card" data-plan="plus" data-price="150">
+    <h3>Protection Plan- Plus</h3>
+    <div class="insurance-inner">
+      <div class="insurance-price">
+        <span class="insurance-currency">AED 150</span>
+        <span class="insurance-unit">Per Month</span>
+      </div>
+      <ul>
+        <li>100% Accident Coverage</li>
+        <li>Windshield Damage</li>
+        <li>Tyre Damages</li>
+      </ul>
+    </div>
+  </div>
+  <div class="insurance-card" data-plan="premium" data-price="150">
+    <h3>Protection Plan- Premium</h3>
+    <div class="insurance-inner">
+      <div class="insurance-price">
+        <span class="insurance-currency">AED 150</span>
+        <span class="insurance-unit">Per Month</span>
+      </div>
+      <ul>
+        <li>100% Accident Coverage</li>
+        <li>Windshield Damage</li>
+        <li>Tyre Damages</li>
+        <li>Lost Keys</li>
+        <li>Rim Damage</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<button class="insurance-skip" id="insuranceContinue">Skip it</button>
+<div id="insuranceNote" class="note"></div>
+
+</section>
+
+<section id="stepLocation" class="step hidden">
+
+<div class="section-header">
+  <span class="section-num">04</span>
+  <span class="section-text">Choose the Pick-up Location</span>
+  <span class="section-line"></span>
+</div>
+
+<div class="location-layout">
+  <div class="location-card">
+    <label>Address*</label>
+    <input id="locationAddress" placeholder="Enter address" />
+
+    <label>Landmark (Optional)</label>
+    <input id="locationLandmark" placeholder="Enter landmark" />
+
+    <label>Pincode*</label>
+    <input id="locationPincode" placeholder="Enter pincode" />
+  </div>
+
+  <div class="location-map">
+    Map Preview
+  </div>
+</div>
+
+<button class="btn-outline" id="locationContinue">Continue</button>
+<div id="locationError" class="error hidden"></div>
+
+</section>
+
+<section id="stepSummary" class="step hidden">
+
+<div class="summary-wrap">
+  <h2 class="summary-title">Booking Summary</h2>
+  <div class="summary-card">
+    <div class="summary-row"><span>Vehicle</span><span id="sumCar">-</span></div>
+    <div class="summary-row"><span>Duration</span><span id="sumDays">-</span></div>
+    <div class="summary-row"><span>Pick-up</span><span id="sumLocation">-</span></div>
+    <div class="summary-row"><span>Insurance Plan</span><span id="sumPlan">-</span></div>
+    <div class="summary-divider"></div>
+    <div class="summary-row"><span>Base Rental</span><span id="sumBase">-</span></div>
+    <div class="summary-row"><span>Insurance fee</span><span id="sumInsurance">-</span></div>
+    <div class="summary-row"><span>Processing fee</span><span id="sumProcessing">-</span></div>
+    <div class="summary-divider"></div>
+    <div class="summary-row"><strong>Subtotal</strong><span id="sumSubtotal">-</span></div>
+    <div class="summary-row"><span>VAT (5%)</span><span id="sumVat">-</span></div>
+    <div class="summary-divider"></div>
+    <div class="summary-row total"><strong>TOTAL</strong><span id="sumTotal">-</span></div>
+  </div>
+
+  <button class="quote-confirm-btn" id="finalConfirm">Confirm Booking</button>
+  <div id="bookingSuccess" class="success hidden"></div>
+  <div id="bookingError" class="error hidden"></div>
+</div>
+
+</section>
 </main>
 
 
+</body>
 <script>
-console.log("--- YOBO JS IS LOADED ---");
-// Wrap your code in a try-catch block so one error doesn't kill the whole app
+    console.log("--- YOBO JS IS LOADED ---");
+   console.log("--- YOBO JS IS LOADED ---");
+
 window.addEventListener('load', () => {
-    try {
-        const getEl = (id) => document.getElementById(id);
 
-        function onlyStep(stepId) {
-            const steps = ["stepHero", "stepAssistant", "stepDetails", "stepFleet", "stepQuote"];
-            steps.forEach(id => {
-                const el = getEl(id);
-                if (el) el.classList.add("hidden");
-            });
-            const target = getEl(stepId);
-            if (target) target.classList.remove("hidden");
-        }
+    const getEl = (id) => document.getElementById(id);
+    const state = {
+        details: { name: "", phone: "", city: "", start: "", end: "" },
+        selectedCar: null,
+        days: 0,
+        baseTotal: 0,
+        insurancePlan: "BASIC",
+        insurancePrice: 150,
+        processingFee: 50,
+        location: "",
+        finalTotal: 0
+    };
 
-        // Only add listeners if the elements exist
-        getEl("goToAssistant")?.addEventListener("click", () => onlyStep("stepAssistant"));
-        getEl("saveName")?.addEventListener("click", () => onlyStep("stepDetails"));
-        getEl("submitDetails")?.addEventListener("click", () => {
-            onlyStep("stepFleet");
-            // You can add your fetch logic here
+    function onlyStep(stepId) {
+        const steps = ["stepHero", "stepAssistant", "stepDetails", "stepFleet", "stepQuote", "stepInsurance", "stepLocation", "stepSummary"];
+
+        steps.forEach(id => {
+            const el = getEl(id);
+            if (el) el.classList.add("hidden");
         });
 
-        console.log("App initialized successfully!");
-    } catch (e) {
-        console.error("System error ignored:", e);
+        const target = getEl(stepId);
+        if (target) target.classList.remove("hidden");
     }
+
+    getEl("goToAssistant")?.addEventListener("click", () => {
+        onlyStep("stepAssistant");
+    });
+
+    getEl("saveName")?.addEventListener("click", () => {
+        onlyStep("stepDetails");
+    });
+
+    getEl("submitDetails")?.addEventListener("click", async () => {
+
+        const name = getEl("fullName").value.trim();
+        const phoneCode = getEl("phoneCode").value;
+        const phone = getEl("phone").value.trim();
+        const city = getEl("city").value.trim();
+        const start = getEl("startDate").value;
+        const end = getEl("endDate").value;
+
+        const err = getEl("detailsError");
+        err.classList.add("hidden");
+
+        if (!name || !phone || !city || !start || !end) {
+            err.textContent = "Please fill in all required details.";
+            err.classList.remove("hidden");
+            return;
+        }
+
+        state.details = { name, phone: `${phoneCode}${phone}`, city, start, end };
+
+        onlyStep("stepFleet");
+
+        const params = new URLSearchParams({
+            start_date: start,
+            end_date: end,
+        });
+
+        const biz = new URLSearchParams(window.location.search).get("biz_id");
+        if (biz) params.set("biz_id", biz);
+
+        let data;
+        try {
+            const res = await fetch(`/api/fleet?${params.toString()}`);
+            data = await res.json();
+        } catch (e) {
+            const ferr = getEl("fleetError");
+            ferr.textContent = "Network error while loading fleet.";
+            ferr.classList.remove("hidden");
+            return;
+        }
+
+        const grid = getEl("fleetGrid");
+        const ferr = getEl("fleetError");
+        ferr.classList.add("hidden");
+        grid.innerHTML = "";
+
+        if (!data || !data.ok) {
+            ferr.textContent = (data && data.error) || "Could not load fleet.";
+            ferr.classList.remove("hidden");
+            return;
+        }
+
+        const fleet = data.data || [];
+        if (!fleet.length) {
+            ferr.textContent = "No cars available for selected dates.";
+            ferr.classList.remove("hidden");
+            return;
+        }
+
+        fleet.forEach(car => {
+            const card = document.createElement("article");
+            card.className = "fleet-card";
+
+            card.innerHTML = `
+                <img src="${car.photo_url || ""}" alt="${car.make || ""} ${car.model || ""}">
+                <div class="fleet-meta">
+                  <div><strong>Make:</strong> ${car.make || "-"}</div>
+                  <div><strong>Model:</strong> ${car.model || "-"}</div>
+                  <div><strong>Price/day:</strong> ₹${car.price_per_day || 0}</div>
+                </div>
+                <button class="select-car">Select</button>
+            `;
+
+            grid.appendChild(card);
+
+            const btn = card.querySelector(".select-car");
+            btn?.addEventListener("click", () => {
+                state.selectedCar = car;
+
+                const startDate = new Date(`${state.details.start}T00:00:00`);
+                const endDate = new Date(`${state.details.end}T00:00:00`);
+                const diffMs = endDate.getTime() - startDate.getTime();
+                const days = Math.max(1, Math.ceil(diffMs / 86400000));
+                const total = (Number(car.price_per_day) || 0) * days;
+                state.days = days;
+                state.baseTotal = total;
+
+                const qTotal = getEl("qTotal");
+                const qDays = getEl("qDays");
+                const qCityInline = getEl("qCityInline");
+                const qCarInline = getEl("qCarInline");
+                const qFormula = getEl("qFormula");
+
+                if (qTotal) qTotal.textContent = `₹${total.toLocaleString()}`;
+                if (qDays) qDays.textContent = `${days} day${days === 1 ? "" : "s"}`;
+                if (qCityInline) qCityInline.textContent = state.details.city;
+                if (qCarInline) qCarInline.textContent = `${car.make || ""} ${car.model || ""}`.trim() || "Selected car";
+                if (qFormula) qFormula.textContent = `${days} day(s) × ₹${Number(car.price_per_day || 0).toLocaleString()} / day`;
+
+                onlyStep("stepQuote");
+            });
+        });
+
+    });
+
+    getEl("confirmBooking")?.addEventListener("click", () => {
+        onlyStep("stepInsurance");
+    });
+
+    getEl("changeCar")?.addEventListener("click", () => {
+        onlyStep("stepFleet");
+    });
+
+    const insuranceGrid = getEl("insuranceGrid");
+    insuranceGrid?.querySelectorAll(".insurance-card").forEach(card => {
+        card.addEventListener("click", () => {
+            insuranceGrid.querySelectorAll(".insurance-card").forEach(c => c.classList.remove("selected"));
+            card.classList.add("selected");
+        });
+    });
+
+    getEl("insuranceContinue")?.addEventListener("click", () => {
+        const selected = insuranceGrid?.querySelector(".insurance-card.selected");
+        const plan = selected?.getAttribute("data-plan") || "basic";
+        const price = selected?.getAttribute("data-price") || "150";
+        const note = getEl("insuranceNote");
+        state.insurancePlan = plan.toUpperCase();
+        state.insurancePrice = Number(price) || 0;
+        if (note) note.textContent = `Selected insurance: ${state.insurancePlan}`;
+        onlyStep("stepLocation");
+    });
+
+    getEl("locationContinue")?.addEventListener("click", () => {
+        const address = getEl("locationAddress").value.trim();
+        const landmark = getEl("locationLandmark").value.trim();
+        const pincode = getEl("locationPincode").value.trim();
+        const err = getEl("locationError");
+        err.classList.add("hidden");
+
+        if (!address || !pincode) {
+            err.textContent = "Please enter address and pincode.";
+            err.classList.remove("hidden");
+            return;
+        }
+
+        state.location = landmark ? `${address}, ${landmark}, ${pincode}` : `${address}, ${pincode}`;
+
+        const insuranceFee = state.insurancePrice;
+        const processingFee = state.processingFee;
+        const subtotal = state.baseTotal + insuranceFee + processingFee;
+        const vat = subtotal * 0.05;
+        const total = subtotal + vat;
+
+        getEl("sumCar").textContent = `${state.selectedCar?.make || ""} ${state.selectedCar?.model || ""}`.trim();
+        getEl("sumDays").textContent = `${state.days} day${state.days === 1 ? "" : "s"}`;
+        getEl("sumLocation").textContent = state.location;
+        getEl("sumPlan").textContent = state.insurancePlan;
+        getEl("sumBase").textContent = `AED ${state.baseTotal.toLocaleString()}`;
+        getEl("sumInsurance").textContent = `AED ${insuranceFee.toLocaleString()}`;
+        getEl("sumProcessing").textContent = `AED ${processingFee.toLocaleString()}`;
+        getEl("sumSubtotal").textContent = `AED ${subtotal.toLocaleString()}`;
+        getEl("sumVat").textContent = `AED ${vat.toFixed(2)}`;
+        getEl("sumTotal").textContent = `AED ${total.toFixed(2)}`;
+
+        state.finalTotal = total;
+        onlyStep("stepSummary");
+    });
+
+    getEl("finalConfirm")?.addEventListener("click", async () => {
+        const err = getEl("bookingError");
+        const ok = getEl("bookingSuccess");
+        err.classList.add("hidden");
+        ok.classList.add("hidden");
+
+        if (!state.selectedCar) {
+            err.textContent = "Select a car first.";
+            err.classList.remove("hidden");
+            return;
+        }
+
+        const payload = {
+            customer_name: state.details.name,
+            phone: state.details.phone,
+            city: state.details.city,
+            start_date: state.details.start,
+            end_date: state.details.end,
+            car_id: state.selectedCar.id,
+            total_price: state.finalTotal,
+            location: state.location,
+            insurance: state.insurancePlan
+        };
+
+        try {
+            const res = await fetch("/api/bookings", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (!data.ok) {
+                err.textContent = data.error || "Booking failed.";
+                err.classList.remove("hidden");
+                return;
+            }
+            ok.textContent = data.message || "Booking confirmed.";
+            ok.classList.remove("hidden");
+        } catch (e) {
+            err.textContent = "Network error while confirming booking.";
+            err.classList.remove("hidden");
+        }
+    });
+
 });
 </script>
-</body>
 </html>
